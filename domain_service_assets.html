@@ -177,30 +177,42 @@
 
     <div class="header-card">
       <div class="header-action-row">
-      <div class="page-title-group">
-        <h1 class="page-title">Service Assets & Fleet Inventory</h1>
-        <p class="page-subtitle">Track registered vehicle assets, hardware trackers, and fleet asset classifications.</p>
+        <div class="page-title-group">
+          <h1 class="page-title">Service Assets & Fleet Inventory</h1>
+          <p class="page-subtitle">Track registered vehicle assets, hardware trackers, and fleet asset classifications.</p>
+        </div>
+        <div class="action-btn-group">
+          <button class="btn-primary" data-tab-cta="tab-asset-type">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+            <span>Create Asset Type</span>
+          </button>
+          <button class="btn-primary" data-tab-cta="tab-assets" style="display: none;">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+            <span>Add Asset</span>
+          </button>
+        </div>
       </div>
-    </div>
 
-    <div class="top-tab-ribbon">
-      <button class="tab-btn active" onclick="switchTab(this, 'tab-asset-type')">Asset Type</button>
-      <button class="tab-btn" onclick="switchTab(this, 'tab-assets')">Assets</button>
-    </div>
+      <div class="header-controls-row">
+        <div class="top-tab-ribbon">
+          <button class="tab-btn active" onclick="switchTab(this, 'tab-asset-type')">Asset Type</button>
+          <button class="tab-btn" onclick="switchTab(this, 'tab-assets')">Assets</button>
+        </div>
+        <div class="header-search-wrap">
+          <div class="search-input-wrap" data-tab-search="tab-asset-type" style="width: 320px;">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+            <input type="text" class="search-input" placeholder="Search Asset Types">
+          </div>
+          <div class="search-input-wrap" data-tab-search="tab-assets" style="width: 320px; display: none;">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+            <input type="text" class="search-input" placeholder="Search Assets by Identifier or Plate">
+          </div>
+        </div>
+      </div>
     </div>
 
     <!-- Tab 1: Asset Type -->
     <div id="tab-asset-type" class="tab-pane active">
-      <div class="header-action-row" style="margin-bottom: 16px;">
-        <div class="search-input-wrap" style="width: 320px;">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
-          <input type="text" class="search-input" placeholder="Search Asset Types">
-        </div>
-        <button class="btn-primary">
-          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
-          <span>Create Asset Type</span>
-        </button>
-      </div>
       <div class="table-card">
         <table class="admin-table">
           <thead>
@@ -248,16 +260,6 @@
 
     <!-- Tab 2: Assets -->
     <div id="tab-assets" class="tab-pane">
-      <div class="header-action-row" style="margin-bottom: 16px;">
-        <div class="search-input-wrap" style="width: 320px;">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
-          <input type="text" class="search-input" placeholder="Search Assets by Identifier or Plate">
-        </div>
-        <button class="btn-primary">
-          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
-          <span>Add Asset</span>
-        </button>
-      </div>
       <div class="table-card">
         <table class="admin-table">
           <thead>
@@ -333,6 +335,13 @@
       btn.classList.add('active');
       const pane = document.getElementById(tabId);
       if (pane) pane.classList.add('active');
+
+      container.querySelectorAll('[data-tab-cta]').forEach(cta => {
+        cta.style.display = (cta.getAttribute('data-tab-cta') === tabId) ? 'inline-flex' : 'none';
+      });
+      container.querySelectorAll('[data-tab-search]').forEach(search => {
+        search.style.display = (search.getAttribute('data-tab-search') === tabId) ? 'flex' : 'none';
+      });
     }
 
     

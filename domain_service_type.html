@@ -177,30 +177,42 @@
 
     <div class="header-card">
       <div class="header-action-row">
-      <div class="page-title-group">
-        <h1 class="page-title">Service Types & Sub Types</h1>
-        <p class="page-subtitle">Configure root mobility service offerings, luxury classifications, and booking categories.</p>
+        <div class="page-title-group">
+          <h1 class="page-title">Service Types & Sub Types</h1>
+          <p class="page-subtitle">Configure root mobility service offerings, luxury classifications, and booking categories.</p>
+        </div>
+        <div class="action-btn-group">
+          <button class="btn-primary" data-tab-cta="tab-srv-type">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+            <span>Create Service Type</span>
+          </button>
+          <button class="btn-primary" data-tab-cta="tab-srv-subtype" style="display: none;">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+            <span>Create Sub Type</span>
+          </button>
+        </div>
       </div>
-    </div>
 
-    <div class="top-tab-ribbon">
-      <button class="tab-btn active" onclick="switchTab(this, 'tab-srv-type')">Service Type</button>
-      <button class="tab-btn" onclick="switchTab(this, 'tab-srv-subtype')">Sub Type</button>
-    </div>
+      <div class="header-controls-row">
+        <div class="top-tab-ribbon">
+          <button class="tab-btn active" onclick="switchTab(this, 'tab-srv-type')">Service Type</button>
+          <button class="tab-btn" onclick="switchTab(this, 'tab-srv-subtype')">Sub Type</button>
+        </div>
+        <div class="header-search-wrap">
+          <div class="search-input-wrap" data-tab-search="tab-srv-type" style="width: 320px;">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+            <input type="text" class="search-input" placeholder="Search Service Type">
+          </div>
+          <div class="search-input-wrap" data-tab-search="tab-srv-subtype" style="width: 320px; display: none;">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+            <input type="text" class="search-input" placeholder="Search Sub Type">
+          </div>
+        </div>
+      </div>
     </div>
 
     <!-- Tab 1: Service Type -->
     <div id="tab-srv-type" class="tab-pane active">
-      <div class="header-action-row" style="margin-bottom: 16px;">
-        <div class="search-input-wrap" style="width: 320px;">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
-          <input type="text" class="search-input" placeholder="Search Service Type">
-        </div>
-        <button class="btn-primary">
-          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
-          <span>Create Service Type</span>
-        </button>
-      </div>
       <div class="table-card">
         <table class="admin-table">
           <thead>
@@ -253,16 +265,6 @@
 
     <!-- Tab 2: Sub Type -->
     <div id="tab-srv-subtype" class="tab-pane">
-      <div class="header-action-row" style="margin-bottom: 16px;">
-        <div class="search-input-wrap" style="width: 320px;">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
-          <input type="text" class="search-input" placeholder="Search Sub Type">
-        </div>
-        <button class="btn-primary">
-          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
-          <span>Create Sub Type</span>
-        </button>
-      </div>
       <div class="table-card">
         <table class="admin-table">
           <thead>
@@ -333,6 +335,13 @@
       btn.classList.add('active');
       const pane = document.getElementById(tabId);
       if (pane) pane.classList.add('active');
+
+      container.querySelectorAll('[data-tab-cta]').forEach(cta => {
+        cta.style.display = (cta.getAttribute('data-tab-cta') === tabId) ? 'inline-flex' : 'none';
+      });
+      container.querySelectorAll('[data-tab-search]').forEach(search => {
+        search.style.display = (search.getAttribute('data-tab-search') === tabId) ? 'flex' : 'none';
+      });
     }
 
     

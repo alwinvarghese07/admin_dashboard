@@ -177,28 +177,37 @@
 
     <div class="header-card">
       <div class="header-action-row">
-      <div class="page-title-group">
-        <h1 class="page-title">Fees & Taxes Management</h1>
-        <p class="page-subtitle">Configure platform commission structures, payment gateway convenience surcharges, and regional tax rates.</p>
+        <div class="page-title-group">
+          <h1 class="page-title">Fees & Taxes Management</h1>
+          <p class="page-subtitle">Configure platform commission structures, payment gateway convenience surcharges, and regional tax rates.</p>
+        </div>
+        <div class="action-btn-group">
+          <button class="btn-primary" data-tab-cta="tab-platform">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+            <span>Add Platform Fee</span>
+          </button>
+          <button class="btn-primary" data-tab-cta="tab-convenience" style="display: none;">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+            <span>Add Convenience Fee</span>
+          </button>
+          <button class="btn-primary" data-tab-cta="tab-taxes" style="display: none;">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+            <span>Add Tax Rule</span>
+          </button>
+        </div>
       </div>
-    </div>
 
-    <div class="top-tab-ribbon">
-      <button class="tab-btn active" onclick="switchTab(this, 'tab-platform')">Platform Fees</button>
-      <button class="tab-btn" onclick="switchTab(this, 'tab-convenience')">Convenience Fees</button>
-      <button class="tab-btn" onclick="switchTab(this, 'tab-taxes')">Taxes</button>
-    </div>
+      <div class="header-controls-row">
+        <div class="top-tab-ribbon">
+          <button class="tab-btn active" onclick="switchTab(this, 'tab-platform')">Platform Fees</button>
+          <button class="tab-btn" onclick="switchTab(this, 'tab-convenience')">Convenience Fees</button>
+          <button class="tab-btn" onclick="switchTab(this, 'tab-taxes')">Taxes</button>
+        </div>
+      </div>
     </div>
 
     <!-- Tab 1: Platform Fees -->
     <div id="tab-platform" class="tab-pane active">
-      <div class="header-action-row" style="margin-bottom: 16px;">
-        <div></div>
-        <button class="btn-primary">
-          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
-          <span>Add Platform Fee</span>
-        </button>
-      </div>
       <div class="table-card">
         <table class="admin-table">
           <thead>
@@ -251,13 +260,6 @@
 
     <!-- Tab 2: Convenience Fees -->
     <div id="tab-convenience" class="tab-pane">
-      <div class="header-action-row" style="margin-bottom: 16px;">
-        <div></div>
-        <button class="btn-primary">
-          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
-          <span>Add Convenience Fee</span>
-        </button>
-      </div>
       <div class="table-card">
         <table class="admin-table">
           <thead>
@@ -302,13 +304,6 @@
 
     <!-- Tab 3: Taxes -->
     <div id="tab-taxes" class="tab-pane">
-      <div class="header-action-row" style="margin-bottom: 16px;">
-        <div></div>
-        <button class="btn-primary">
-          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
-          <span>Add Tax Rule</span>
-        </button>
-      </div>
       <div class="table-card">
         <table class="admin-table">
           <thead>
@@ -371,6 +366,10 @@
       btn.classList.add('active');
       const pane = document.getElementById(tabId);
       if (pane) pane.classList.add('active');
+
+      container.querySelectorAll('[data-tab-cta]').forEach(cta => {
+        cta.style.display = (cta.getAttribute('data-tab-cta') === tabId) ? 'inline-flex' : 'none';
+      });
     }
 
     
